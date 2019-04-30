@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            text-align:center;
+        }
+        #mask {
+            width: 300px;
+            height: 150px;
+            margin: 0 auto;
+            background: url('cat.jpg');
+            background-size:100% 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>请在下面刮奖</h1>
+    <canvas id="mask"></canvas>
+    <h3 id="result"></h3>        
+</body>
+<script>
+    var result=document.getElementById("result");
+    result.innerHTML="0%";
+    var canvas = document.getElementById('mask');
+    var context = canvas.getContext("2d");
+    context.fillStyle = "#d1d1d1";
+    context.fillRect(0, 0, 300, 150);
+    context.globalCompositeOperation = 'destination-out';
+    function drawArcByPoint(x, y) {
+        context.beginPath();
+        context.arc(x - canvas.offsetLeft, y - canvas.offsetTop, 20, 0, Math.PI * 2);
+        context.closePath();
+        context.fillStyle = '#dddddd';
+        context.fill();
+        checkComplete();
+    }
+    function checkComplete() {
+        var imgData = context.getImageData(0, 0, 300, 150);
+        var pxData = imgData.data;
+        var len = pxData.length;
+        var count = 0;
+        for (var i = 0; i < len; i += 4) {
+            var alpha = pxData[i + 3]; 
+            if (alpha < 10) { 
+                count++;
+            }
+        }
+        var percent = count / (len / 4);
+        result.innerHTML=parseInt(percent*100)+"%";
+        if (percent >= 0.85) { 
+            context.fillStyle="#dddddd";
+            context.fillRect(0,0,300,150);
+            result.innerHTML="刮奖完成";
+        }
+    }
+    canvas.addEventListener('mousedown', drawArcMouseHandle);
+    canvas.addEventListener('mouseup', function (event) {
+        this.removeEventListener('mousemove', mousemoveHandle);
+    });
+    function drawArcMouseHandle(event) {
+        event.preventDefault();
+        event.target.addEventListener("mousedown", mousemoveHandle);
+        event.target.addEventListener("mousemove", mousemoveHandle);
+    }
+    function mousemoveHandle(event) {
+        event.preventDefault();
+        drawArcByPoint(event.pageX, event.pageY);
+    }
+</script>
+</html>
