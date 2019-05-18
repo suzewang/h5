@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    #container{
+        width:400px;
+        height:500px;
+        position:relative;
+        margin:0 auto;
+        border:5px solid rgb(236, 230, 230);
+    }
+    #photo{
+        width:400px;
+        height:300px;
+        background-color:black;
+        overflow:hidden;
+    }
+    #photo img{
+        width:100%;
+        height:100%;
+        transition:all 1s;
+    }
+    #date{
+        width:60px;
+        height:60px;
+        background-color:rgb(247, 84, 9);
+        position:absolute;
+        left:310px;
+        top:30px;
+        border-radius:50%;
+        font-weight:bold;
+        color:white;
+        text-align:center;
+        line-height:16px;
+        justify-content:center;
+        align-items:center;
+        display:flex;
+    }
+    #container:hover div img{
+        transform:scale(1.2,1.2);
+        opacity:0.6;
+    }
+    #container:hover #type{
+        top:130px;
+    }
+    #container:hover #introduce{
+        top:160px;
+        height:290px;
+    }
+    #container:hover #photo{
+        box-shadow:0 0 5px gray;
+    }
+    #container:hover #introduce{
+        box-shadow:0 0 5px gray;
+        height:340px;
+    }
+    #type{
+        width:65px;
+        height:30px;
+        background-color:rgb(247, 60, 14);
+        font-weight:bold;
+        color:white;
+        text-align:center;
+        line-height:30px;
+        position:absolute;
+        top:270px;
+        transition:top 1s;
+    }
+    #introduce{
+        width:380px;
+        height:200px;
+        padding-left:20px;
+        line-height:20px;
+        background-color:white;
+        position:absolute;
+        top:300px;
+        transition:all 1s;
+    }
+    #p1{
+        color:red;
+        font-size:20px;
+    }
+    #p2{
+        font-size:15px;
+        color:gray;
+        position:absolute;
+        left:20px;
+        top:450px;
+    }
+    #p3{
+        width:350px;
+        position:absolute;
+        left:20px;
+        font-size:20px;
+        color:gray;
+        line-height:35px;
+        top:300px;
+        opacity:0;
+        transition:top 1s linear -0.2s,opacity 0.2s linear 0.3s;
+    }
+    #container:hover #p3{
+        top:240px;
+        opacity:1;
+    }
+</style>
+<body>
+    <div id="container">
+        <div id="photo"><img src="images/zhanqiao.jpg"></div>
+        <div id="date">15<br>五月</div>
+        <div id="type">照片</div>
+        <div id="introduce">
+            <h2>青岛栈桥</h2>
+            <p id="p1">国家AAAA级旅游景区</p>
+        </div>
+        <div id="p3">青岛栈桥是青岛海滨风景区的景点之一是国务院于1982年首批公布的国家级风景名胜区青岛栈桥位于游人如织的青岛中山路南端桥身从海岸探入如弯月般的青岛湾深处桥身供游人参观</div>
+        <p id="p2">10分钟前&nbsp&nbsp&nbsp&nbsp&nbsp123评论</p>
+    </div>
+</body>
+</html>
